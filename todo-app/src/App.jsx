@@ -5,6 +5,20 @@ import { GoCheck } from "react-icons/go";
 
 function App() {
   const [isCompleteScreen, setCompleteScreen] = useState(false);
+  const [allTodos, setTodos] = useState([]);
+  const [newTitle, setNewtitle] = useState("");
+  const [newDescription, setNewDescription] = useState("");
+
+  const handleAddtodo = () => {
+    let newTodoItem = {
+      title: newTitle,
+      description: newDescription,
+    };
+
+    let updatedTodoArr = [...allTodos];
+    updatedTodoArr.push(newTodoItem);
+    setTodos(updatedTodoArr);
+  };
 
   return (
     <div className="App">
@@ -13,14 +27,28 @@ function App() {
         <div className="todo-input">
           <div className="todo-input-item">
             <label htmlFor="">Title</label>
-            <input type="text" placeholder="What's the task title ?" />
+            <input
+              type="text"
+              value={newTitle}
+              onChange={(e) => setNewtitle(e.target.value)}
+              placeholder="What's the task title ?"
+            />
           </div>
           <div className="todo-input-item">
-            <label htmlFor="">Description</label>
-            <input type="text" placeholder="What's the task description ?" />
+            <label>Description</label>
+            <input
+              type="text"
+              value={newDescription}
+              onChange={(e) => setNewDescription(e.target.value)}
+              placeholder="What's the task description ?"
+            />
           </div>
           <div className="todo-input-item">
-            <button type="button" className="primaryBtn">
+            <button
+              type="button"
+              onClick={handleAddtodo}
+              className="primaryBtn"
+            >
               Add
             </button>
           </div>
@@ -42,20 +70,22 @@ function App() {
         </div>
 
         <div className="todo-list">
-          <div className="todo-list-items">
-            <div>
-            <h3>Task 1</h3>
-            <p>Description</p>
-            </div>
-           
-            <div>
-            <AiOutlineDelete className="icon" />
-            <GoCheck className="check-icon" />
-          </div>
-          </div>
-          
-        </div>
+          {allTodos.map((item, index) => {
+            return (
+              <div className="todo-list-items" key={index}>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </div>
 
+                <div>
+                  <AiOutlineDelete className="icon" />
+                  <GoCheck className="check-icon" />
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
