@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { AiOutlineDelete } from "react-icons/ai";
 import { GoCheck } from "react-icons/go";
@@ -18,7 +18,15 @@ function App() {
     let updatedTodoArr = [...allTodos];
     updatedTodoArr.push(newTodoItem);
     setTodos(updatedTodoArr);
+    localStorage.setItem('todolist',JSON.stringify(updatedTodoArr))
   };
+
+  useEffect(()=>{
+    let savedTodo = JSON.parse(localStorage.getItem('todolist'));
+    if(savedTodo){
+      setTodos(savedTodo)
+    }
+  },[])
 
   return (
     <div className="App">
