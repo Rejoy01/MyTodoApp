@@ -83,3 +83,58 @@ h1{
 .active{
   background-color: rgb(0,230, 122);
 }
+
+.btn-area{
+  margin-bottom: 15px;
+}
+
+.todo-list{
+  display: flex;
+  flex-direction: column;
+
+}
+
+.todo-list-items{
+  background-color: #414040;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0px 3px 5px rgba(43, 42,42);
+}
+
+.todo-list-items h3{
+  font-size: 25px;
+  color: rgb(0, 230, 122);
+  margin: 0px;
+  font-weight: bold;
+}
+
+.todo-list-items p{
+  font-size: 14px;
+  color: rgb(161,161,161);
+  margin-top: 8px;
+}
+
+.icon{
+  font-size: 35px;
+  cursor: pointer;
+}
+
+.check-icon{
+  font-size: 25px;
+  margin-left: 10px;
+  color: rgb(0, 230, 122);
+  cursor: pointer;
+}
+
+.icon:hover{
+  color: red;
+}
+
+.check-icon:hover{
+  color: rgb(4, 196, 106);;
+}
