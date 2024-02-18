@@ -39,7 +39,7 @@ function App() {
     let h = now.getHours()
     let m = now.getMinutes()
     let s = now.getSeconds()
-    let completedOn = dd + '-' + mm + '-' + yyyy + '-' + h + '-' + m + '-' + s;
+    let completedOn = dd + '-' + mm + '-' + yyyy + " at "+ h + ' : ' + m + ' : ' + s;
     let filteredItem ={
       ...allTodos[index],
       completedOn:completedOn
@@ -47,10 +47,18 @@ function App() {
     let updatedCompletedArr = [...CompletedTodos]
     updatedCompletedArr.unshift(filteredItem)
     setCompletedTodos(updatedCompletedArr)
+    handleDeleteTodo(index)
+    localStorage.setItem('completedTodos', JSON.stringify(updatedCompletedArr))  
   }
 
   useEffect(()=>{
     let savedTodo = JSON.parse(localStorage.getItem('todolist'));
+    let savedCompletedTodo = JSON.parse(localStorage.getItem('completedTodos'));
+
+    if(savedCompletedTodo){
+      setCompletedTodos(savedCompletedTodo)
+    }
+
     if(savedTodo){
       setTodos(savedTodo)
     }
@@ -106,7 +114,7 @@ function App() {
         </div>
 
         <div className="todo-list">
-          {allTodos.map((item, index) => {
+          {isCompleteScreen ==false && allTodos.map((item, index) => {
             return (
               <div className="todo-list-items" key={index}>
                 <div>
@@ -119,6 +127,24 @@ function App() {
                     handleDeleteTodo(index)
                   }}/>
                   <GoCheck className="check-icon"  onClick={()=>handleComplete(index)} title="Complete?"/>
+                </div>
+              </div>
+            );
+          })}
+           {isCompleteScreen ==true && CompletedTodos.map((item, index) => {
+            return (
+              <div className="todo-list-items" key={index}>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                  <p><small>Completed on : {item.completedOn}</small></p>
+                </div>
+
+                <div>
+                  <AiOutlineDelete className="icon" onClick={()=>{
+                    handleDeleteTodo(index)
+                  }}/>
+                  {/* <GoCheck className="check-icon"  onClick={()=>handleComplete(index)} title="Complete?"/> */}
                 </div>
               </div>
             );
