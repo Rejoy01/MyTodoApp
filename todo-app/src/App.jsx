@@ -8,6 +8,8 @@ function App() {
   const [allTodos, setTodos] = useState([]);
   const [newTitle, setNewtitle] = useState("");
   const [newDescription, setNewDescription] = useState("");
+  const [CompletedTodos,setCompletedTodos] = useState([]);
+
 
   const handleAddtodo = () => {
     let newTodoItem = {
@@ -16,17 +18,35 @@ function App() {
     };
 
     let updatedTodoArr = [...allTodos];
-    updatedTodoArr.push(newTodoItem);
+    updatedTodoArr.unshift(newTodoItem);
     setTodos(updatedTodoArr);
     localStorage.setItem('todolist',JSON.stringify(updatedTodoArr))
   };
 
   const handleDeleteTodo = (index) => {
     let reduceTod =[...allTodos];
-    reduceTod.splice(index);
+    reduceTod.splice(index,1);
     setTodos(reduceTod);
     localStorage.setItem('todolist', JSON.stringify(reduceTod));
+  }
 
+
+  const handleComplete =(index)=>{
+    let now = new Date();
+    let dd = now.getDate()
+    let mm = now.getMonth()+1
+    let yyyy = now.getFullYear()
+    let h = now.getHours()
+    let m = now.getMinutes()
+    let s = now.getSeconds()
+    let completedOn = dd + '-' + mm + '-' + yyyy + '-' + h + '-' + m + '-' + s;
+    let filteredItem ={
+      ...allTodos[index],
+      completedOn:completedOn
+    }
+    let updatedCompletedArr = [...CompletedTodos]
+    updatedCompletedArr.unshift(filteredItem)
+    setCompletedTodos(updatedCompletedArr)
   }
 
   useEffect(()=>{
@@ -98,7 +118,7 @@ function App() {
                   <AiOutlineDelete className="icon" onClick={()=>{
                     handleDeleteTodo(index)
                   }}/>
-                  <GoCheck className="check-icon" />
+                  <GoCheck className="check-icon"  onClick={()=>handleComplete(index)} title="Complete?"/>
                 </div>
               </div>
             );
