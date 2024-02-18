@@ -1,6 +1,6 @@
 # Todo App
 
-## To Visit Click [Here](https://rejoy01mytodoapp.pages.dev/)
+## To Visit Click [Here](https://rejoy02mytodoapp.pages.dev/)
 
 This is a simple todo application built with React.
 
@@ -30,7 +30,7 @@ This is a simple todo application built with React.
     npm start
 2. Open your browser and navigate to [http://localhost:3000](http://localhost:3000) to view the application.
 
-3. Alternatively, you can access the deployed version of the application [here]([<deployed_link>](https://rejoy01mytodoapp.pages.dev/)).
+3. Alternatively, you can access the deployed version of the application [here](https://rejoy02mytodoapp.pages.dev/).
 
 ### Usage
 
