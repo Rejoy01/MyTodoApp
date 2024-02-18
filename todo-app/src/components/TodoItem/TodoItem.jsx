@@ -1,6 +1,7 @@
 import React from 'react';
 import { AiOutlineDelete } from "react-icons/ai";
-import { GoCheck } from "react-icons/go";
+import { IoIosCheckboxOutline } from "react-icons/io";
+
 
 const TodoItem = ({ item, index, handleDeleteTodo, handleComplete }) => {
   return (
@@ -14,7 +15,7 @@ const TodoItem = ({ item, index, handleDeleteTodo, handleComplete }) => {
           className="icon"
           onClick={() => handleDeleteTodo(index)}
         />
-        <GoCheck
+        <IoIosCheckboxOutline
           className="check-icon"
           onClick={() => handleComplete(index)}
           title="Complete?"
