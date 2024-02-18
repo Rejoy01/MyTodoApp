@@ -13,6 +13,7 @@ function App() {
   const [newDescription, setNewDescription] = useState("");
   const [CompletedTodos, setCompletedTodos] = useState([]);
 
+  // Add new todo item
   const handleAddtodo = () => {
     let newTodoItem = {
       title: newTitle,
@@ -25,6 +26,7 @@ function App() {
     localStorage.setItem("todolist", JSON.stringify(updatedTodoArr));
   };
 
+  // Delete todo item
   const handleDeleteTodo = (index) => {
     let reduceTod = [...allTodos];
     reduceTod.splice(index, 1);
@@ -32,6 +34,7 @@ function App() {
     localStorage.setItem("todolist", JSON.stringify(reduceTod));
   };
 
+   // Handle completing a todo item
   const handleComplete = (index) => {
     let now = new Date();
     let dd = now.getDate();
@@ -53,6 +56,7 @@ function App() {
     localStorage.setItem("completedTodos", JSON.stringify(updatedCompletedArr));
   };
 
+  // Handle deleting a completed todo item
   const handleDeleteCompletedTodo = (index) => {
     let reduceTod = [...CompletedTodos];
     reduceTod.splice(index, 1);
@@ -60,6 +64,7 @@ function App() {
     localStorage.setItem("completedTodos", JSON.stringify(reduceTod));
   };
 
+   // Load saved todos from localStorage on mount
   useEffect(() => {
     let savedTodo = JSON.parse(localStorage.getItem("todolist"));
     let savedCompletedTodo = JSON.parse(localStorage.getItem("completedTodos"));
@@ -77,7 +82,7 @@ function App() {
     <div className="App">
       <h1>My Todos</h1>
       <div className="todo-wrapper">
-        {/* input section */}
+           {/* Input fields for adding new todo */}
         <TodoInput handleAddtodo={handleAddtodo} setNewtitle = {setNewtitle} newTitle = {newTitle} setNewDescription={setNewDescription} newDescription = {newDescription}  />
 
         <div className="btn-area">
@@ -99,52 +104,14 @@ function App() {
           {isCompleteScreen == false &&
             allTodos.map((item, index) => {
               return (
-                // <div className="todo-list-items" key={index}>
-                //   <div>
-                //     <h3>{item.title}</h3>
-                //     <p>{item.description}</p>
-                //   </div>
-
-                //   <div>
-                //     <AiOutlineDelete
-                //       className="icon"
-                //       onClick={() => {
-                //         handleDeleteTodo(index);
-                //       }}
-                //     />
-                //     <GoCheck
-                //       className="check-icon"
-                //       onClick={() => handleComplete(index)}
-                //       title="Complete?"
-                //     />
-                //   </div>
-                // </div>
+                // Component for rendering a single todo item
                 <TodoItem item={item} index ={index} handleComplete={handleComplete} handleDeleteTodo = {handleDeleteTodo}/>
               );
             })}
           {isCompleteScreen == true &&
             CompletedTodos.map((item, index) => {
               return (
-                // <div className="todo-list-items" key={index}>
-                //   <div>
-                //     <h3>{item.title}</h3>
-                //     <p>{item.description}</p>
-                //     <p>
-                //       <small>Completed on : {item.completedOn}</small>
-                //     </p>
-                //   </div>
-
-                //   <div>
-                //     <AiOutlineDelete
-                //       className="icon"
-                //       onClick={() => {
-                //         handleDeleteCompletedTodo(index);
-                    
-                //       }}
-                //       title="Delete ?"
-                //     />
-                //   </div>
-                // </div>
+               // Component for rendering a single completed todo item
                 <CompletedTodoItem item={item} index={index} handleDeleteCompletedTodo = {handleDeleteCompletedTodo}/>
               );
             })}
