@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { AiOutlineDelete } from "react-icons/ai";
-import { GoCheck } from "react-icons/go";
+
 import TodoInput from "./components/TodoInput/TodoInput";
 import TodoItem from "./components/TodoItem/TodoItem";
 import CompletedTodoItem from "./components/CompletedTodo/CompletedTodoItem";
